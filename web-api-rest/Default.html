@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Using Load</title>
+    <script src="Scripts/jquery-3.1.1.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#saveData").click(function () {
+                SaveData();
+            });
+            $("#getData").click(function () {
+                GetData();
+            });
+            $("#updateData").click(function () {
+                UpdateData();
+            });
+            $("#deleteData").click(function () {
+                DeleteData();
+            });
+        });
+
+        function SaveData() {
+
+            $.post("http://localhost/web-api-rest/api/employee", { Id: 1, Name: "Rupesh" })
+                .done(function (data) {
+                    $("#OutputDiv").html("ID :" + data.Id + " " + "Name :" + data.Name);
+                })
+                .fail(function (data) {
+                    $("#OutputDiv").html(data);
+                })
+            ;
+
+
+        }
+
+        function GetData() {
+
+            $.get("http://localhost/web-api-rest/api/employee/1")
+                .done(
+                function (data) {
+                    $("#OutputDiv").html("ID :" + data.Id + " " + "Name :" + data.Name);
+                })
+                .fail(
+                function (data) {
+                    $("#OutputDiv").html(data);
+                }
+            );
+
+        }
+
+
+        function UpdateData() {
+
+            $.ajax({
+                url: "http://localhost/web-api-rest/api/employee",
+                type: "PUT",
+                data: { Id: 1, Name: "_Rupesh" }
+
+            }).done(
+                function (data) {
+                    $("#OutputDiv").html("ID :" + data.Id + " " + "Name :" + data.Name);
+                }
+            ).fail(
+                function (data) {
+                    $("#OutputDiv").html(data);
+                }
+            );
+        }
+
+        function DeleteData() {
+
+            $.ajax({
+                url: "http://localhost/web-api-rest/api/employee/1",
+                type: "DELETE"
+            }).done(
+                function (data) {
+                    $("#OutputDiv").html("ID :" + data.Id + " " + "Name :" + data.Name);
+                }).fail(
+               function (data) {
+                   $("#OutputDiv").html(data);
+               });
+
+        }
+
+    </script>
+</head>
+<body>
+    <button id="saveData">Click to Save the data</button>
+    <button id="getData">Click to Get the data</button>
+    <button id="updateData">Click to Update the data</button>
+    <button id="deleteData">Click to Delete the data</button>
+    <div id="OutputDiv"></div>
+</body>
+</html>
