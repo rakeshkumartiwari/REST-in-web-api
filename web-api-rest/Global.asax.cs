@@ -15,7 +15,7 @@ namespace web_api_rest
         {
             
             GlobalConfiguration.Configure(WebApiConfig.Register);
-            Database.SetInitializer(new DropCreateDatabaseAlways<EmployeeDb>());
+           
         }
     }
 }

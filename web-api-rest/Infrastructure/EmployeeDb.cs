@@ -7,7 +7,7 @@ namespace web_api_rest.Infrastructure
     {
         public EmployeeDb()
         {
-           
+            Database.SetInitializer(new DropCreateDatabaseAlways<EmployeeDb>());
         }
 
         public DbSet<Employee> Employees { get; set; }

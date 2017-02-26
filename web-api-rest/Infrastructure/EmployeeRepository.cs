@@ -1,5 +1,8 @@
+using System;
 using System.Data;
+using System.Globalization;
 using System.Linq;
+using System.Web.Services.Description;
 using web_api_rest.Models;
 
 namespace web_api_rest.Infrastructure
@@ -19,7 +22,15 @@ namespace web_api_rest.Infrastructure
 
         public Employee GetEmployee(int id)
         {
-            return _db.Employees.Single(e=>e.Id == id);
+            try
+            {
+                return _db.Employees.Single(e => e.Id == id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message.ToString());
+            }
+            
         }
 
         public void Update(Employee employeeToUpdate)
